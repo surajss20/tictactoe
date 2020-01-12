@@ -1,0 +1,62 @@
+while True:
+    #create  and show  board
+    b=[' ']*10
+    #display_board(b)
+    m=input('pls enter player1 name : ').upper()
+    n=input('pls enter player2 name : ').upper()
+
+    #player1 select marker ie X or O
+    player1_marker,player2_marker=choose_marker(m)
+    #randomly decide who is first;ie decide whose turn
+    turn=choose_first()
+    print(turn+' will play first')
+    game_on=True
+   
+    while game_on:
+        if turn==m:
+            #show board
+            display_board(b)
+            # player_choice
+            print('\n'+  m,end =" ")
+                       #assign the respective marker to that position and show the board
+            place_marker(b,player1_marker,player_choice(b))
+           
+            #check if player1 is winning
+            if win_check(b,player1_marker):
+                display_board(b)
+                print('\n        '+m+' IS THE WINNER.\n     '+n+' better luck next time. ')
+                game_on=False
+            #if not check if its tie
+            else:
+                if fullboard_check(b):
+                    print('Its a Tie')
+                    game_on=False
+                else:
+                    #else player 2 turn
+                    turn=n
+           
+        else:
+            #show board
+            display_board(b)
+            # player_choice
+            print('\n'+n,end =" ")
+           
+            #assign the respective marker to that position and show the board
+            place_marker(b,player2_marker, player_choice(b))
+           
+            #check if player2 is winning
+            if win_check(b,player2_marker):
+                display_board(b)
+                print('\n        '+n+' IS THE WINNER. \n     '+m+' better luck next time. ')
+                game_on=False
+            #if not check if its tie
+            else:
+                if fullboard_check(b):
+                    display_board(b)
+                    print('Its a Tie')
+                    game_on=False
+                else:
+                    #else player 2 turn
+                    turn=m
+    if not replay():
+        break
